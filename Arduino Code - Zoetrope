@@ -1,0 +1,54 @@
+//Code borrowed from arduino tutorials, "BlinkWithoutDelay", "Button"
+//Zoetrope
+
+//Variables
+int motorPin = 9;          
+const int ledPin =  13;
+const int buttonPin =  4;
+ int buttonState = 0;
+
+int ledState = LOW;
+long previousMillis = 0; 
+long interval = 50;
+
+
+void setup()                    
+{
+  pinMode(motorPin, OUTPUT);  
+   pinMode(ledPin, OUTPUT);
+    pinMode(buttonPin, INPUT);
+}
+
+
+void loop()                     
+{   
+  buttonState = digitalRead(buttonPin);
+  
+   if (buttonState == HIGH) 
+   {     
+                analogWrite(motorPin, 20);
+        
+         unsigned long currentMillis = millis();
+         
+         if(currentMillis - previousMillis > interval) 
+             {
+                // save the last time you blinked the LED 
+                previousMillis = currentMillis;   
+            
+                // if the LED is off turn it on and vice-versa:
+                if (ledState == LOW)
+                  ledState = HIGH;
+                else
+                  ledState = LOW;
+            
+                // set the LED with the ledState of the variable:
+                digitalWrite(ledPin, ledState);
+              }
+    } 
+  else 
+  {         
+    digitalWrite(ledPin, LOW);  
+    digitalWrite(motorPin, LOW);  
+  }
+  
+}
